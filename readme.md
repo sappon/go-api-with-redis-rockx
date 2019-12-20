@@ -41,6 +41,13 @@ example for `POST localhost:8080/updateData` request body in JSON
 }
 ```
 
+## Run Test
+
+*Ensure the APIs are running by `go run .` or run bin/go-api-with-redis-rockx*
+
+1. direct to src/ folder
+2. `go test` or `go test route_test.go -v` to see more details 
+
 ## Dependencies:
 
 ```sh
@@ -58,3 +65,4 @@ buid restful api: https://medium.com/codezillas/building-a-restful-api-with-go-p
 
 consume restful api: https://www.thepolyglotdeveloper.com/2017/07/consume-restful-api-endpoints-golang-application/
 
+test: https://medium.com/@kiransp0007/test-cases-for-rest-services-in-golang-beb6699c75a0
