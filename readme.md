@@ -52,7 +52,7 @@ go get -u github.com/gorilla/mux
 
 create go project: https://golang.org/doc/code.html
 
-redis with go: https://medium.com/@gilcrest_65433/basic-redis-examples-with-go-a3348a12878e
+redis with go: https://medium.com/@gilcrest_65433/basic-redis-examples-with-go-a3348a12878e, https://godoc.org/github.com/garyburd/redigo/redis
 
 buid restful api: https://medium.com/codezillas/building-a-restful-api-with-go-part-1-9e234774b14d
 

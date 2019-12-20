@@ -3,11 +3,17 @@ package main
 import (
 	"log"
 	"net/http"
+	"flag"
 
 	"github.com/gorilla/mux"
 )
 
+
+
 func main() {
+
+	flag.Parse()
+	pool = newPool(*redisServer)
 
 	// init router
 	router := mux.NewRouter()

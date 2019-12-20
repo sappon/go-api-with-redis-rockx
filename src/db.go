@@ -2,8 +2,10 @@ package main
 
 import (
 	"time"
-	"github.com/gomodule/redigo/redis"
 	"encoding/json"
+	"flag"
+
+	"github.com/gomodule/redigo/redis"
 )
 
 type Object struct {
@@ -11,19 +13,24 @@ type Object struct {
 	CreatedAt 	time.Time
 }
 
-func redisConn() redis.Conn {
-	c, err := redis.Dial("tcp", ":6379")
-	if err != nil {
-		panic(err.Error())
-	}
-	return c
+var (
+  pool *redis.Pool
+  redisServer = flag.String("redisServer", ":6379", "")
+)
+
+func newPool(addr string) *redis.Pool {
+  return &redis.Pool{
+    MaxIdle: 3,
+    IdleTimeout: 240 * time.Second,
+    Dial: func () (redis.Conn, error) { return redis.Dial("tcp", addr) },
+  }
 }
 
 // set executes the redis SET command
 func set(key string, data ReturnObj) error {
 
 	// Connect to Redis (DB)
-	conn := redisConn()
+	conn := pool.Get()
 	defer conn.Close()  // close the connection when the function completes
 
 	obj := Object{}
@@ -42,7 +49,7 @@ func set(key string, data ReturnObj) error {
 func get(key string) ([]byte, error) {
 
 	// Connect to Redis (DB)
-	conn := redisConn()
+	conn := pool.Get()
 	defer conn.Close()  // close the connection when the function completes
 
 	// Simple GET example with String helper
